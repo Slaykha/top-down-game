@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : Collidable
+public class Chest : Collectable
 {
     protected override void OnCollide(Collider2D col)
     {
