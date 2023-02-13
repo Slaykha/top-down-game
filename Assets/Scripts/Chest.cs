@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Chest : Collectable
 {
-    protected override void OnCollide(Collider2D col)
+    public Sprite emptyChest;
+    public int lirasAmount = 10;
+
+    protected override void OnCollect()
     {
-        base.OnCollide(col);
+        if (!collected)
+        {
+            collected = true;
+            GetComponent<SpriteRenderer>().sprite = emptyChest;
+            Debug.Log("Grand " + lirasAmount + " liras!");
+        }
     }
 }
