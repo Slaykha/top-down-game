@@ -13,6 +13,7 @@ public class Chest : Collectable
         {
             collected = true;
             GetComponent<SpriteRenderer>().sprite = emptyChest;
+            GameManager.instance.liras += lirasAmount;
             Debug.Log("Grand " + lirasAmount + " liras!");
         }
     }

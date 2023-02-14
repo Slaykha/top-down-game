@@ -10,6 +10,7 @@ public class Portal : Collidable
         if(col.name == "Player")
         {
             //Teleport
+            GameManager.instance.SaveState();
             string sceneName = sceneNames[Random.Range(0, sceneNames.Length)];
             SceneManager.LoadScene(sceneName); 
         }
