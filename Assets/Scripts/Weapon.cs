@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : Collidable
 {
     public int damagePoint = 1;
-    public float pudhForce = 2.0f;
+    public float pushForce = 2.0f;
 
     // Upgrade
     public int weaponLevel = 0;
@@ -48,7 +48,7 @@ public class Weapon : Collidable
             Damage dmg = new Damage
             {
                 damageAmount = damagePoint,
-                pushForce = pudhForce,
+                pushForce = pushForce,
                 origin = transform.position
             };
 

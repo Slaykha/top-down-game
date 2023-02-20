@@ -22,7 +22,7 @@ public class Fighter : MonoBehaviour
         {
             lastImmune = Time.time;
             hitPoint -= dmg.damageAmount;
-            pushDirection = (transform.position -dmg.origin).normalized * dmg.pushForce;
+            pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
             GameManager.instance.showText(dmg.damageAmount.ToString(), 24, Color.red, transform.position, Vector3.up * 20, 0.5f);
 
