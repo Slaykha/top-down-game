@@ -5,8 +5,13 @@ using UnityEngine;
     
 public class Player : Mover
 {
-    private float dashLength = 0.35f;
-    private Vector3 dashDirection;
+    private SpriteRenderer spriteRenderer;
+
+    protected override void Start()
+    {
+        base.Start();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void FixedUpdate()
     {
@@ -15,18 +20,37 @@ public class Player : Mover
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Dash(transform.position);
-            return;
+            if(dashCoolCounter <= 0 && dashCounter <= 0)
+            {
+                Speed = dashSpeed;
+                dashCounter = dashLength;
+            }
+        }
+
+        if(dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+
+            if(dashCounter <= 0)
+            {
+                Speed = 1f;
+                dashCoolCounter = dashCoolDown;
+            }
+        }
+
+        if(dashCoolCounter > 0)
+        {
+            dashCoolCounter -= Time.deltaTime;
         }
 
         UpdateMotor(new Vector3(x, y, 0));
 
     }
 
-    private void Dash(Vector3 pos)
+    public void SwapSprite(int skinId)
     {
-
-        moveDelta = pos * dashLength;
-        UpdateMotor(moveDelta);
+        spriteRenderer.sprite = GameManager.instance.playerSprite[skinId];
     }
+
+
 }

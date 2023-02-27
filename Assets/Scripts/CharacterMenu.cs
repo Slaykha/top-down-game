@@ -41,20 +41,26 @@ public class CharacterMenu : MonoBehaviour
     private void OnSelectionChanged()
     {
         characterSelectionSprite.sprite = GameManager.instance.playerSprite[currentCharacterSelection];
+        GameManager.instance.player.SwapSprite(currentCharacterSelection);
     }
 
     // Weaoon Upgrade
     public void OnUpgradeClick()
     {
-        // 
+        if (GameManager.instance.TryUpgradeWeapon())
+            UpdateMenu();
     }
 
     // Update character information
     public void UpdateMenu()
     {
         // Weapon
-        weaponSprite.sprite = GameManager.instance.weaponSprite[0];
-        upgradeCostText.text = "NOT IMPLEMENTED";
+        weaponSprite.sprite = GameManager.instance.weaponSprite[GameManager.instance.weapon.weaponLevel];
+        if (GameManager.instance.weapon.weaponLevel == GameManager.instance.weaponPrices.Count)
+            upgradeCostText.text = "MAX";
+        else
+            upgradeCostText.text = GameManager.instance.weaponPrices[GameManager.instance.weapon.weaponLevel].ToString();
+        upgradeCostText.text = GameManager.instance.weaponPrices[GameManager.instance.weapon.weaponLevel].ToString();
         // Meta 
         levelText.text = "NOT IMPLEMENTED";
         hitPointText.text = GameManager.instance.player.hitPoint.ToString();

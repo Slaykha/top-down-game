@@ -7,8 +7,13 @@ public abstract class Mover : Fighter
     protected BoxCollider2D boxCollider;
     protected Vector3 moveDelta;
     protected RaycastHit2D hit;
-    protected float ySpeed = 0.75f;
-    protected float xSpeed = 1.0f;
+    protected float Speed = 1.0f;
+
+    public float dashSpeed = 5f;
+    public float dashLength = .2f, dashCoolDown = 1f;
+
+    protected float dashCounter;
+    protected float dashCoolCounter;
 
     protected virtual void Start()
     {
@@ -18,7 +23,7 @@ public abstract class Mover : Fighter
     protected virtual void UpdateMotor(Vector3 input)
     {
         //Reset moveDelta
-        moveDelta = new Vector3(input.x * xSpeed, input.y * ySpeed, 0);
+        moveDelta = new Vector3(input.x * Speed, input.y * Speed, 0);
 
         //swap sprite direction
         if (moveDelta.x > 0)

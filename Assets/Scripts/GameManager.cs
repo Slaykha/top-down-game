@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     // References
     public Player player;
+    public Weapon weapon;
     public FloatingTextManager floatingTextManager;
 
     // Logic
@@ -41,6 +42,23 @@ public class GameManager : MonoBehaviour
         floatingTextManager.Show(msg, fontSize, color, pos, motion, duration);
     }
 
+    // Upgrade Weapon
+    public bool TryUpgradeWeapon()
+    {
+        // i the weapon mac level
+        if (weaponPrices.Count <= weapon.weaponLevel)
+            return false;
+
+        if(liras >= weaponPrices[weapon.weaponLevel])
+        {
+            liras -= weaponPrices[weapon.weaponLevel];
+            weapon.UpgradeWeapon();
+            return true;
+        }
+
+        return false;
+    }
+
     public void SaveState()
     {
         string s = "";
@@ -48,6 +66,7 @@ public class GameManager : MonoBehaviour
         s += "0" + "|";
         s += liras.ToString() + "|";
         s += experience.ToString() + "|";
+        s += weapon.weaponLevel.ToString() + "|";
         s += "0";
 
         PlayerPrefs.SetString("SaveState", s);
@@ -62,6 +81,7 @@ public class GameManager : MonoBehaviour
 
         liras = int.Parse(data[1]);
         experience = int.Parse(data[2]);
+        weapon.SetWeaponLevel(int.Parse(data[3]));
 
     }
 
