@@ -62,14 +62,30 @@ public class CharacterMenu : MonoBehaviour
             upgradeCostText.text = GameManager.instance.weaponPrices[GameManager.instance.weapon.weaponLevel].ToString();
         upgradeCostText.text = GameManager.instance.weaponPrices[GameManager.instance.weapon.weaponLevel].ToString();
         // Meta 
-        levelText.text = "NOT IMPLEMENTED";
+        levelText.text = GameManager.instance.GetLevel().ToString();
         hitPointText.text = GameManager.instance.player.hitPoint.ToString();
         lirasText.text = GameManager.instance.liras.ToString();
 
         // xp Bar
-        xpText.text = "NOT IMPLEMENTED";
-        xpBar.localScale = new Vector3(0.5f, 0, 0);
+        int currLevel = GameManager.instance.GetLevel();
+        if (currLevel == GameManager.instance.xpTable.Count)
+        {
+            xpText.text = GameManager.instance.experience.ToString() + "total experience";
+            xpBar.localScale = Vector3.one;
+        }else
+        {
+            // 30 xp, level 1
+            int prevLevelXp = GameManager.instance.GetXpToLevel(currLevel - 1);
+            int currentLevelXp = GameManager.instance.GetXpToLevel(currLevel);
 
+            int neededLevelXp = currentLevelXp - prevLevelXp;
+            int currentXpToLevel = GameManager.instance.experience - prevLevelXp;
+
+            float xpBarCompletion = (float)currentXpToLevel / (float)neededLevelXp;
+
+            xpText.text = currentXpToLevel.ToString() + " / " + neededLevelXp.ToString();
+            xpBar.localScale = new Vector3(xpBarCompletion, 1, 1);
+        }
     }
 
 }

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public List<Sprite> playerSprite;
     public List<Sprite> weaponSprite;
     public List<int> weaponPrices;
-    public List<int> cpTable;
+    public List<int> xpTable;
 
     // References
     public Player player;
@@ -57,6 +57,38 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    // Experience
+    public int GetLevel()
+    {
+        int r = 0;
+        int add = 0;
+
+        while (experience >= add)
+        {
+            add += xpTable[r];
+            r++;
+
+            if (r == xpTable.Count)
+                return r;
+        }
+
+        return r;
+    }
+
+    public int GetXpToLevel(int level)
+    {
+        int r = 0;
+        int xp = 0;
+
+        while(r < level)
+        {
+            xp += xpTable[r];
+            r++;
+        }
+
+        return xp;
     }
 
     public void SaveState()
