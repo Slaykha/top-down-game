@@ -44,6 +44,7 @@ public class Player : Mover
         }
 
         UpdateMotor(new Vector3(x, y, 0));
+        GameManager.instance.DashCoolDown(dashCoolCounter);
 
     }
 

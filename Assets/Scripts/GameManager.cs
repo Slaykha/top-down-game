@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,11 +23,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     // Ressources
     public List<Sprite> playerSprite;
     public List<Sprite> weaponSprite;
     public List<int> weaponPrices;
     public List<int> xpTable;
+    public RectTransform dashBar;
+    public TMP_Text dashText;
 
     // References
     public Player player;
@@ -35,6 +40,8 @@ public class GameManager : MonoBehaviour
     // Logic
     public int liras;
     public int experience;
+
+    
 
     //Floating Text
     public void showText(string msg, int fontSize, Color color, Vector3 pos, Vector3 motion, float duration)
@@ -89,6 +96,17 @@ public class GameManager : MonoBehaviour
         }
 
         return xp;
+    }
+
+    // Dash
+    public void DashCoolDown(float coolDown)
+    {
+        string text = "1 / 1";
+        if (coolDown > 0)
+            text = "0 / 1";
+
+        dashText.text = text;
+        dashBar.localScale = new Vector3(1 - coolDown, 1, 1);
     }
 
     public void SaveState()
