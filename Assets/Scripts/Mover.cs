@@ -9,6 +9,7 @@ public abstract class Mover : Fighter
     protected RaycastHit2D hit;
     protected float Speed = 1.0f;
 
+    public Vector3 dashDirection;
     public float dashSpeed = 5f;
     public float dashLength = .2f, dashCoolDown = 1f;
 
@@ -43,6 +44,7 @@ public abstract class Mover : Fighter
         {
             //move player
             transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
+            dashDirection = moveDelta;
         }
 
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, 0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
@@ -50,6 +52,7 @@ public abstract class Mover : Fighter
         {
             //move player
             transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
+            dashDirection = moveDelta;
         }
     }
 }

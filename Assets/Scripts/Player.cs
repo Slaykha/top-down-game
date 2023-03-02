@@ -13,35 +13,39 @@ public class Player : Mover
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if(dashCoolCounter <= 0 && dashCounter <= 0)
+            if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
                 Speed = dashSpeed;
                 dashCounter = dashLength;
             }
         }
 
-        if(dashCounter > 0)
+        if (dashCounter > 0)
         {
             dashCounter -= Time.deltaTime;
 
-            if(dashCounter <= 0)
+            if (dashCounter <= 0)
             {
                 Speed = 1f;
                 dashCoolCounter = dashCoolDown;
             }
         }
 
-        if(dashCoolCounter > 0)
+        if (dashCoolCounter > 0)
         {
             dashCoolCounter -= Time.deltaTime;
         }
+
+    }
+
+    private void FixedUpdate()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
 
         UpdateMotor(new Vector3(x, y, 0));
         GameManager.instance.DashCoolDown(dashCoolCounter);
