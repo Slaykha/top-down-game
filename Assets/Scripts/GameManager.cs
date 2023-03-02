@@ -98,6 +98,21 @@ public class GameManager : MonoBehaviour
         return xp;
     }
 
+    public void GrantXp(int xp)
+    {
+        int currLevel = GetLevel();
+        experience += xp;
+        if(currLevel < GetLevel())
+        {
+            OnLevelUp();
+        }
+    }
+
+    public void OnLevelUp()
+    {
+        player.OnLevelUp();
+    }
+
     // Dash
     public void DashCoolDown(float coolDown)
     {
@@ -131,6 +146,8 @@ public class GameManager : MonoBehaviour
 
         liras = int.Parse(data[1]);
         experience = int.Parse(data[2]);
+        if (GetLevel() != 1)
+            player.SetLevel(GetLevel());
         weapon.SetWeaponLevel(int.Parse(data[3]));
 
     }
