@@ -14,6 +14,7 @@ public class Enemy : Mover
     private bool collidingWithPlayer;
     private Transform playerTransform;
     private Vector3 startingPosition;
+    private float EnemySpeed = 0.75f;
 
     // Hitbox
     public ContactFilter2D filter;
@@ -30,6 +31,7 @@ public class Enemy : Mover
 
     private void FixedUpdate()
     {
+        Speed = EnemySpeed;
         // is player in range
         if(Vector3.Distance(playerTransform.position, startingPosition) < chaseLength)
         {
