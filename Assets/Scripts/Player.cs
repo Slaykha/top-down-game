@@ -13,7 +13,6 @@ public class Player : Mover
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(GameObject.Find("HUD"));
     }
 
     private void Update()
