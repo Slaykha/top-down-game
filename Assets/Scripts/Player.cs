@@ -13,6 +13,7 @@ public class Player : Mover
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(GameObject.Find("HUD"));
     }
 
     private void Update()
@@ -50,7 +51,7 @@ public class Player : Mover
         float y = Input.GetAxisRaw("Vertical");
 
         UpdateMotor(new Vector3(x, y, 0));
-        GameManager.instance.DashCoolDown(dashCoolCounter);
+        GameManager.instance.DashCoolDownBar(dashCoolCounter);
 
     }
 
@@ -71,5 +72,14 @@ public class Player : Mover
         {
             OnLevelUp();
         }
+    }
+
+    public void Heal(int healingAmount)
+    {
+        
+        hitPoint += healingAmount;
+        if (hitPoint > maxHitPoint)
+            hitPoint = maxHitPoint;
+        GameManager.instance.showText("+" + healingAmount.ToString() + "hp", 25, Color.green, transform.position, Vector3.up * 30, 1.0f);
     }
 }

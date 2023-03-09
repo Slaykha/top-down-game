@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         SceneManager.sceneLoaded += LoadState;
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(GameObject.Find("HUD"));
 
     }
 
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Dash
-    public void DashCoolDown(float coolDown)
+    public void DashCoolDownBar(float coolDown)
     {
         string text = "1 / 1";
         if (coolDown > 0)
