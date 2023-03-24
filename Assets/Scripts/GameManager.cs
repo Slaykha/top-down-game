@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public List<int> xpTable;
     public RectTransform dashBar;
     public TMP_Text dashText;
+    public RectTransform healthBar;
+    public TMP_Text healtText;
 
     // References
     public Player player;
@@ -125,6 +127,15 @@ public class GameManager : MonoBehaviour
 
         dashText.text = text;
         dashBar.localScale = new Vector3(1 - coolDown, 1, 1);
+    }
+
+    public void HandleHealthBar(float health, float maxHealth)
+    {
+        string text = health + " / " + maxHealth;
+        healtText.text = text;
+        Debug.Log(health / maxHealth);
+        healthBar.localScale = new Vector3((health / maxHealth), 1 ,1);
+
     }
 
     public void SaveState()

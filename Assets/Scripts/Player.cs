@@ -52,6 +52,7 @@ public class Player : Mover
 
         UpdateMotor(new Vector3(x, y, 0));
         GameManager.instance.DashCoolDownBar(dashCoolCounter);
+        GameManager.instance.HandleHealthBar(hitPoint, maxHitPoint);
 
     }
 
