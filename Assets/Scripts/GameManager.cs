@@ -133,7 +133,6 @@ public class GameManager : MonoBehaviour
     {
         string text = health + " / " + maxHealth;
         healtText.text = text;
-        Debug.Log(health / maxHealth);
         healthBar.localScale = new Vector3((health / maxHealth), 1 ,1);
 
     }
