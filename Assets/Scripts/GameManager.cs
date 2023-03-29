@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += LoadState;
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("HUD"));
-
+        UnityEngine.UI.Button btn = GameObject.Find("Button").GetComponent<UnityEngine.UI.Button>();
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() => { GameObject.Find("Menu").GetComponent<Animator>().SetTrigger("Show"); });
+        btn.onClick.AddListener(() => { GameObject.Find("Menu").GetComponent<CharacterMenu>().UpdateMenu(); });
     }
 
 

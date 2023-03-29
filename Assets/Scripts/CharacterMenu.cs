@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class CharacterMenu : MonoBehaviour
 {
+
+    public static CharacterMenu instance;
+
     // Text Fields
     public TMP_Text levelText, hitPointText, lirasText, upgradeCostText, xpText;
 
@@ -60,7 +63,7 @@ public class CharacterMenu : MonoBehaviour
             upgradeCostText.text = "MAX";
         else
             upgradeCostText.text = GameManager.instance.weaponPrices[GameManager.instance.weapon.weaponLevel].ToString();
-        upgradeCostText.text = GameManager.instance.weaponPrices[GameManager.instance.weapon.weaponLevel].ToString();
+        
         // Meta 
         levelText.text = GameManager.instance.GetLevel().ToString();
         hitPointText.text = GameManager.instance.player.hitPoint.ToString();
